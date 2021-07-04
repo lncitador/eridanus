@@ -1,12 +1,14 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 message Article {
   string id = 1;
-  string author_id = 2;
+  string authorId = 2;
   string category = 3;
   string markdown = 4;
-  string created_at = 5;
-  string updated_at = 6;
+  google.protobuf.Timestamp createdAt = 5;
+  google.protobuf.Timestamp updatedAt = 6;
 }
 
 message GetArticleByIdRequest {
@@ -14,14 +16,16 @@ message GetArticleByIdRequest {
 }
 
 message CreateArticleRequest {
-  Article article = 1;
+  string authorId = 1;
+  string category = 2;
+  string markdown = 3;
 }
 
 message ArticleResponse {
   Article article = 1;
 }
 
-service UserService {
+service ArticleService {
   rpc GetArticleById(GetArticleByIdRequest) returns (ArticleResponse);
   rpc CreateArticle(CreateArticleRequest) returns (ArticleResponse);
 }

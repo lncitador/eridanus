@@ -19,10 +19,10 @@
     "grpc": "^1.24.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.9",
+    "mongoose": "^5.13.2",
     "protobufjs": "^6.11.2",
     "protoc-gen-grpc": "^2.0.2",
-    "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.2.34"
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

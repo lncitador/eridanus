@@ -1,11 +1,12 @@
-import { GrpcObject, loadPackageDefinition } from "grpc";
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import grpc from "grpc";
 import path from "path";
 
 import * as protoLoader from "@grpc/proto-loader";
 
-export function loadProto(fileName: string): GrpcObject {
+export function loadProto() {
   const packageDefinition = protoLoader.loadSync(
-    path.resolve(__dirname, "pb", `${fileName}.proto`),
+    path.resolve(__dirname, "pb", `article.proto`),
     {
       keepCase: true,
       longs: String,
@@ -14,7 +15,7 @@ export function loadProto(fileName: string): GrpcObject {
       oneofs: true,
     }
   );
-  const proto = loadPackageDefinition(packageDefinition);
+  const proto = grpc.loadPackageDefinition(packageDefinition);
 
   return proto;
 }

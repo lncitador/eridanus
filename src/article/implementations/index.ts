@@ -1,34 +1,38 @@
 import { handleUnaryCall } from "grpc";
 
-import { ArticleRespository } from "@article/typeorm/repositories/ArticleRespository";
 import {
+  IArticle,
   ICreateArticleRequest,
   IGetArticleByIdRequest,
   IArticleResponse,
 } from "@proto";
+
+import Article from "../model";
 
 interface IArticleService {
   createArticle: handleUnaryCall<ICreateArticleRequest, IArticleResponse>;
   getArticleById: handleUnaryCall<IGetArticleByIdRequest, IArticleResponse>;
 }
 
-const articleRepository = new ArticleRespository();
-
 const implementation: IArticleService = {
   async createArticle(call, callback) {
-    const { article } = call.request;
+    const { authorId, category, markdown } = call.request as IArticle;
 
-    const createArticle = await articleRepository.createArticle({ article });
+    const article = await Article.create({
+      authorId,
+      category,
+      markdown,
+    });
 
-    return callback(null, { article: createArticle.article });
+    return callback(null, { article });
   },
 
   async getArticleById(call, callback) {
     const { id } = call.request;
 
-    const findArticle = await articleRepository.getArticleByIdRequest({ id });
+    const article = await Article.findById(id);
 
-    return callback(null, { article: findArticle.article });
+    return callback(null, { article });
   },
 };
 
