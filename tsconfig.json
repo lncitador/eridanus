@@ -6,9 +6,12 @@
     "rootDir": "./",
     "baseUrl": "./src",
     "paths": {
-      "@modules/*": ["modules/*"],
-      "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"]
+      "@proto": ["../proto/generated"],
+      "@loadproto": ["../proto"],
+      "@article": ["article"],
+      "@article/*": ["article/*"],
+      "@database": ["database"],
+      "@database/*": ["database/*"]
     },
     "strictPropertyInitialization": false,
     "esModuleInterop": true,

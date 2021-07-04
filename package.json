@@ -6,23 +6,38 @@
   "author": "lncitador <walaffonofre@icloud.com>",
   "license": "MIT",
   "scripts": {
+    "prebuild": "rm -rf ./proto/generated && mkdir ./proto/generated",
+    "build": "pbjs -t static-module -w commonjs -o ./proto/generated/index.js ./proto/pb/*.proto && pbts -o ./proto/generated/index.d.ts ./proto/generated/index.js",
+    "postbuild": "echo \"Generated files! 🚀\"",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore node_modules --respawn index.ts"
   },
   "dependencies": {
     "@grpc/proto-loader": "^0.5.3",
     "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "google-protobuf": "^3.17.3",
     "grpc": "^1.24.2",
     "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.6.9",
+    "protobufjs": "^6.11.2",
+    "protoc-gen-grpc": "^2.0.2",
+    "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.34"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/google-protobuf": "^3.15.2",
     "@types/jsonwebtoken": "^8.3.8",
     "@typescript-eslint/eslint-plugin": "^4.28.1",
     "@typescript-eslint/parser": "^4.28.1",
     "eslint": "^7.30.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import-helpers": "^1.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.2",
     "ts-node-dev": "^1.1.8",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.3.5"

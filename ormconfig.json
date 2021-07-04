@@ -1,0 +1,13 @@
+[
+  {
+    "name": "mongo",
+    "type": "mongodb",
+    "host": "localhost",
+    "port": 27017,
+    "database": "DailyPlanet",
+    "useUnifiedTopology": true,
+    "entities": [
+      "./src/**/typeorm/entities/*.ts"
+    ]
+  }
+]
