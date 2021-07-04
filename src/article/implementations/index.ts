@@ -1,5 +1,4 @@
-import { handleUnaryCall } from "grpc";
-
+import { handleUnaryCall, UntypedServiceImplementation } from "@grpc/grpc-js";
 import {
   IArticle,
   ICreateArticleRequest,
@@ -9,7 +8,7 @@ import {
 
 import Article from "../model";
 
-interface IArticleService {
+interface IArticleService extends UntypedServiceImplementation {
   createArticle: handleUnaryCall<ICreateArticleRequest, IArticleResponse>;
   getArticleById: handleUnaryCall<IGetArticleByIdRequest, IArticleResponse>;
 }

@@ -1,16 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import grpc from "grpc";
 import "@database";
+
+import * as grpc from "@grpc/grpc-js";
 
 import { loadProto } from "@loadproto";
 
 import { implementation } from "./implementations";
 
-export const startServer = (): void => {
+export const startServer = (port: number): void => {
   const proto = loadProto();
   const server = new grpc.Server();
   server.addService((proto.ArticleService as any).service, implementation);
 
-  server.bind(`127.0.0.1:50051`, grpc.ServerCredentials.createInsecure());
-  server.start();
+  server.bindAsync(
+    `127.0.0.1:${port}`,
+    grpc.ServerCredentials.createInsecure(),
+    (error, port) => {
+      console.log(`Server running at http://127.0.0.1:${port}`);
+      server.start();
+    }
+  );
 };
