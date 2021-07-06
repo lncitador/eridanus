@@ -13,10 +13,10 @@ export const startServer = (port: number): void => {
   server.addService((proto.ArticleService as any).service, implementation);
 
   server.bindAsync(
-    `127.0.0.1:${port}`,
+    `0.0.0.0:${port}`,
     grpc.ServerCredentials.createInsecure(),
     (error, port) => {
-      console.log(`Server running at http://127.0.0.1:${port}`);
+      console.log(`Server running at port: ${port}`);
       server.start();
     }
   );

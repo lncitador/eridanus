@@ -1,13 +1,29 @@
 version: "3.7"
 
 services:
+  database:
+    image: mongo:latest
+    restart: always
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
   app:
     build: .
     container_name: eridanus
-    environment: 
-      SERVER_PORT: 50051
     ports: 
       - 50051:50051
       # - 9229:9229
     volumes: 
       - .:/usr/app
+    environment:
+      - SERVER_PORT=50051
+      - MONGO_URI=mongodb://database:27017
+    links:
+      - database
+    depends_on: 
+      - database
+volumes:
+  mongodb:
+  mongodb_config:
